@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 chunk_size = 15000  # Adjust the chunk size as needed
-chunks1 = pd.read_csv('https://github.com/Bornali13/HOD-Assignment/blob/main/dataset1.csv', encoding='utf-8', chunksize=chunk_size , error_bad_lines=False)
+chunks1 = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/dataset1.csv', encoding='utf-8', chunksize=chunk_size)
 chunks2 = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/dataset2.csv', encoding='utf-8', chunksize=chunk_size)
 chunks3 = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/dataset3.csv', encoding='utf-8', chunksize=chunk_size)
 

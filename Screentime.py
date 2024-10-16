@@ -4,14 +4,24 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 chunk_size = 15000
-chunks = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/merged_dataset.csv', encoding='utf-8', chunksize=chunk_size)
-merged_df = pd.concat(chunks)
-
-screentime = merged_df[['C_wk', 'G_wk', 'S_wk', 'T_wk', 'C_we', 'G_we', 'S_we', 'T_we']]
+chunks2 = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/dataset2.csv', encoding='utf-8', chunksize=chunk_size)
+screentime = pd.concat(chunks2)
 screentime.describe()
 
-#Frequency of Distribution
-screentime.mean()
+
+# Calculating mean, median, and mode for each column
+mean_values = screentime.mean()
+median_values = screentime.median()
+mode_values = screentime.mode().iloc[0]
+
+# Prepare the results
+summary_stats = pd.DataFrame({
+    'Mean': mean_values,
+    'Median': median_values,
+    'Mode': mode_values
+})
+
+import ace_tools as tools; tools.display_dataframe_to_user(name="Screen Time Summary Statistics", dataframe=summary_stats)
 
 #Nature of Distribution
 import warnings
