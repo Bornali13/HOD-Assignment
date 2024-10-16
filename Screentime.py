@@ -10,6 +10,10 @@ merged_df = pd.concat(chunks)
 screentime = merged_df[['C_wk', 'G_wk', 'S_wk', 'T_wk', 'C_we', 'G_we', 'S_we', 'T_we']]
 screentime.describe()
 
+#Frequency of Distribution
+screentime.mean()
+
+#Nature of Distribution
 import warnings
 warnings.filterwarnings('ignore')
 
