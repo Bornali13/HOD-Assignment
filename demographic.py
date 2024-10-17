@@ -4,22 +4,30 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 chunk_size = 15000
-chunks = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/merged_dataset.csv', encoding='utf-8', chunksize=chunk_size)
-merged_df = pd.concat(chunks)
+chunks1 = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/dataset1.csv', encoding='utf-8', chunksize=chunk_size)
+demographic = pd.concat(chunks1)
 
-#Frequency Distribution
-demographic = merged_df[['gender', 'minority', 'deprived']]
-demographic.mode()
+# Calculate  mode for each column
+statistics = {}
+for col in demographic.columns[1:]:  # Exclude 'ID' column
+    statistics[col] = {
+        'mode': demographic[col].mode()[0]  # Mode might return multiple values, so take the first
+    }
+
+# Convert to DataFrame for better visualization
+stats_df = pd.DataFrame(statistics)
+
+print(stats_df)
 
 #Demographic data maping
 #gender
-merged_df['gender_mapped'] = merged_df['gender'].map({1: 'Male', 0: 'Female'})
+demographic['gender_mapped'] = demographic['gender'].map({1: 'Male', 0: 'Female'})
 #Minority
-merged_df['minority_mapped'] = merged_df['minority'].map({1: 'Minority', 0: 'Mejority'})
+demographic['minority_mapped'] = demographic['minority'].map({1: 'Minority', 0: 'Mejority'})
 #Deprived
-merged_df['deprived_mapped'] = merged_df['deprived'].map({1: 'In locality', 0: 'Outside locality'})
+demographic['deprived_mapped'] = demographic['deprived'].map({1: 'In locality', 0: 'Outside locality'})
 
-mapped_demographic = merged_df[['gender_mapped', 'minority_mapped', 'deprived_mapped']]
+mapped_demographic = demographic[['gender_mapped', 'minority_mapped', 'deprived_mapped']]
 mapped_demographic.head()
 
 
@@ -45,10 +53,10 @@ def plot_demographic_distribution(df, column, title):
     plt.show()
 
 # Gender distribution
-plot_demographic_distribution(merged_df, 'gender_mapped', 'Gender Distribution')
+plot_demographic_distribution(demographic, 'gender_mapped', 'Gender Distribution')
 
 # Minority status distribution
-plot_demographic_distribution(merged_df, 'minority_mapped', 'Minority Status Distribution')
+plot_demographic_distribution(demographic, 'minority_mapped', 'Minority Status Distribution')
 
 # Deprivation status distribution
-plot_demographic_distribution(merged_df, 'deprived_mapped', 'Deprivation Status Distribution')
+plot_demographic_distribution(demographic, 'deprived_mapped', 'Deprivation Status Distribution')

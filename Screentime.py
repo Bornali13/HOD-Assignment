@@ -8,20 +8,20 @@ chunks2 = pd.read_csv('C:/Users/Asus/OneDrive/Documents/GitHub/HOD-Assignment/da
 screentime = pd.concat(chunks2)
 screentime.describe()
 
+# Calculate mean, median, and mode for each column
+statistics = {}
+for col in screentime.columns[1:]:  # Exclude 'ID' column
+    statistics[col] = {
+        'mean': screentime[col].mean(),
+        'median': screentime[col].median(),
+        'mode': screentime[col].mode()[0]  # Mode might return multiple values, so take the first
+    }
 
-# Calculating mean, median, and mode for each column
-mean_values = screentime.mean()
-median_values = screentime.median()
-mode_values = screentime.mode().iloc[0]
+# Convert to DataFrame for better visualization
+stats_df = pd.DataFrame(statistics)
 
-# Prepare the results
-summary_stats = pd.DataFrame({
-    'Mean': mean_values,
-    'Median': median_values,
-    'Mode': mode_values
-})
+print(stats_df)
 
-import ace_tools as tools; tools.display_dataframe_to_user(name="Screen Time Summary Statistics", dataframe=summary_stats)
 
 #Nature of Distribution
 import warnings
